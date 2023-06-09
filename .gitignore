@@ -1,5 +1,2 @@
 build
 node_modules
-.env.dev
-.env.production
-.env.test
