@@ -1,22 +1,41 @@
-import { Request, Response } from 'express'
+import { Controller, Post, Body, Route, Tags } from 'tsoa'
 import { User } from '../../models/user'
+interface CreateUserRequest {
+  name: string
+  password: string
+}
 
-export class UserCreate {
-  static async create(req: Request, res: Response) {
-    const { name, password } = req.body
+interface CreateUserResponse {
+  user?: Omit<CreateUserRequest, "password">
+  message?: string
+  code: number
+}
 
-    User.create({
+@Route("users")
+@Tags("Users")
+export class UserCreate extends Controller {
+  @Post('/create')
+  static async create(@Body() body: CreateUserRequest): Promise<CreateUserResponse> {
+    
+    const { name, password } = body
+
+    return User.create({
       name, password
     })
       .then(() => {
-        return res.status(200).json({
-          name, password
-        })
+        return {
+          user: {
+            name
+          },
+          message: "Create",
+          code: 200
+        }
       })
       .catch(() => {
-        return res.status(422).json({
-          message: "nao deu"
-        })
+        return {
+          message: "Erro ao criar usuario",
+          code: 422
+        }
       })
   }
 }

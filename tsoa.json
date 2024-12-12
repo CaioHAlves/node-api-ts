@@ -1,0 +1,18 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/controllers/**/*.ts"],
+  "spec": {
+    "outputDirectory": "./swagger",
+    "specVersion": 3,
+    "basePath": "/",
+    "host": "localhost:3000",
+    "schemes": ["http"]
+  },
+  "noImplicitAny": true,
+  "defaultResponse": "Default response",
+  "routes": {
+    "routesDir": "src/routes",
+    "middleware": "express"
+  }
+}

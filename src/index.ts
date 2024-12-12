@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import swaggerUi from 'swagger-ui-express'
-import { swaggerConfig } from './swagger/swaggerConfig'
+import swaggerUi from 'swagger-ui-express';
+import swaggerConfig from '../swagger/swagger.json'
 
 import UserRoutes from './routes/UserRoutes'
 
@@ -27,7 +27,7 @@ app.use("/users", UserRoutes)
 
 // Block swagger in production 
 if (process.env.AMBIENT !== "production") {
-  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 }
 
 app.listen(port, "0.0.0.0", () => {
